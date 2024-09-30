@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Mountain Beer</title>
-  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 
    <!-- FontAwesome CDN -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -25,9 +26,9 @@
     height: 300px;
   }
   footer {
-      padding: 20px 0;
-    }
-    .footer-content {
+    display: none;
+  }
+  .footer-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -53,25 +54,52 @@
 }
   </style>
 </head>
-<body class="bg-light">
-  <div class="container my-2">
+<body style="background-color: #222;">
+<!-- check the age -->
+<div id="content" >
+  <div class="container">
+      <div class="beer-title text-center">
+      <!-- Split the text into individual spans -->
+      <span>მ</span><span>თ</span><span>ი</span><span>ს</span>
+      <span>ლ</span><span>უ</span><span>დ</span><span>ი</span>
+    </div>
+    
+      <div id="inputFields" class="top-content">
+        <h5 class="title mb-5">თუ თქვენ უკვე მიაღწიეთ ალკოჰოლური სასმლის მიღებისთვის კანონით განსაზღვრულ ასაკს, შეიყვანეთ თქვენი დაბადების თარიღი<h5/>
+        
+        <!-- Flexbox for Inputs -->
+        <div class="d-flex justify-content-center inputs mb-4">
+          <input type="number" id="input-day" name="day" placeholder="დღე" class="form-control input">
+          <input type="number" id="input-month" name="month" placeholder="თვე" class="form-control input">
+          <input type="number" id="input-year" name="year" placeholder="წელი" class="form-control input">
+        </div>
+        
+        <!-- Button -->
+        <button type="submit" class="btn btn-primary enter" onclick="verifyAge()">შესვლა</button>
+      </div>
+    </div>
+   </div> <!-- end check the age -->
+
+
+   <div id="mainContent" style="display: none;">
+  <div class="container  my-2">
     <div class="my-xs-1 my-sm-2 my-md-4 my-lg-5 my-xl-6 ">
-      <img src="./IMG_1165.JPG" alt="Logo" class="rounded mx-auto d-block logo">
+      <img src="./assets/photos/logo.JPG" alt="Logo" class="rounded mx-auto d-block logo">
     </div>
 
-    <h6 class="my-md-4 my-lg-5 my-xl-6 text-center text-dark font-weight-bold">მთის ლუდი თუ მტრის სისხლი</h6>
+    <h6 class="my-4 my-md-4 my-lg-5 my-xl-6 text-center text-dark font-weight-bold">მთის ლუდი თუ მტრის სისხლი</h6>
 
-    <div class="my-md-4 my-lg-5 my-xl-6"></div>
-      <img src="./IMG_1164.JPG" alt="beers" class="rounded mx-auto d-block beers">
+    <div class="my-4 my-lg-5 my-xl-6"></div>
+      <img src="./assets/photos/beers.JPG" alt="beers" class="rounded mx-auto d-block beers">
     </div>
   </div>
 
   <!-- Contact information  -->
-    <footer>
+    <footer id="footerInfo" class="py-md-3 py-lg-4 py-xl-5">
        <div class="row text-center my-md-3 my-lg-4 my-xl-5">
         <!-- Address Title -->
         <div class="col-md-6">
-          <h6 class="text-dark font-weight-bold">ლუდი იწარმოება აქ
+          <h6 class="my-4 text-dark font-weight-bold">ლუდი იწარმოება აქ
           <span style='font-size: 2rem; height: 10vh; font-weight: 200; color: blue; margin-left: 5px; padding-bottom: 15px;' class="arrow text-center">       
             <i class="fa-solid fa-down-long"></i>
           </span></h6>
@@ -82,24 +110,118 @@
         </div>
 
         <!-- Phone number -->
-        <div class="col-md-6 mb-sm-2 mb-md-3 mb-lg-4 mb-xl-5">
-          <h6 class="text-dark font-weight-bold">ტელ: <a href="tel:+995577936762">577936762</a></h6> 
+        <div class="col-md-6 my-sm-2 my-md-3 my-lg-4 my-xl-5 text-center">
+          <h6 class="text-dark font-weight-bold">ტელ: 
+            <a href="tel:+995577936762">577936762</a>, 
+            <a href="tel:+995591015752">591015752</a>
+          </h6>
         </div>
 
      
 
       </div>
     <!-- Social Network -->
-    <div class="text-center mb-4">
+    <div class="text-center">
 
-      <a href="https://facebook.com/MTIS-LUDI" class="my-md-3 my-lg-4 my-xl-5"><img class="img-responsive mx-sm-2 mx-md-4 mx-lg-5 mx-xl-6" width="40" height="40" src="./facebook.png" alt="facebook-icon" ></a>
+      <a href="https://facebook.com/MTIS-LUDI" class="my-md-3 my-lg-4 my-xl-5 mx-2"><img class="img-responsive mx-sm-2 mx-md-4 mx-lg-5 mx-xl-6" width="40" height="40" src="./assets/social/facebook.png" alt="facebook-icon" ></a>
 
-      <a href="https://g.co/kgs/PnXupo4" class="my-md-3 my-lg-4 my-xl-5"><img class="img-responsive mx-sm-2 mx-md-4 mx-lg-5 mx-xl-6" width="40" height="40" src="./google.png" alt="google-icon" ></a>
+      <a href="https://g.co/kgs/PnXupo4" class="my-md-3 my-lg-4 my-xl-5 mx-2"><img class="img-responsive mx-sm-2 mx-md-4 mx-lg-5 mx-xl-6" width="40" height="40" src="./assets/social/google.png" alt="google-icon" ></a>
       
     </div>
     </footer>
+  </div>
 
+  <div class="d-flex justify-content-center mt-4"> 
+    <div id="errorMsg" class="alert alert-danger alert-dismissible fade show w-50 py-5 d-none text-center"  role="alert">
+  <h3> სამწუხაროდ, თქვენ <strong>არ გაქვთ </strong> ალკოჰოლური სასმლის მიღების უფლება.</h3>
 
-  
 </body>
+<script> 
+        // GSAP Animation for "Mountain Beer" text
+        gsap.to(".beer-title span", {
+      duration: 1,              // Duration for each letter's animation
+      opacity: 1,               // Fade in the letters
+      y: 0,                     // Move letters back to the original position
+      ease: "bounce.out",       // Bounce effect
+      stagger: 0.1              // Stagger the animation (0.1 second delay between letters)
+    });
+
+
+
+function verifyAge() {
+            // Get input values
+            const day = parseInt(document.getElementById('input-day').value);
+            const month = parseInt(document.getElementById('input-month').value);
+            const year = parseInt(document.getElementById('input-year').value);
+
+            // Check if inputs are valid
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                alert('გთხოვთ, შეიყვანეთ სწორი თარიღი');
+                return;
+            }
+
+            // Calculate age
+            const today = new Date();
+            const birthDate = new Date(year, month - 1, day); // JavaScript months are 0-indexed
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            const dayDiff = today.getDate() - birthDate.getDate();
+
+            // Adjust age if birthdate hasn't occurred yet this year
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age--;
+            }
+
+            // Check if the user is old enough (e.g., 18 years old)
+            const legalDrinkingAge = 18; // Set to your legal drinking age
+            // remove and add error message
+            const errMsg=document.getElementById("errorMsg");
+            const inputFields=document.getElementById("inputFields");
+            const timeline = gsap.timeline({
+              // duration: 3,
+              paused: true
+              });
+
+            if (age >= legalDrinkingAge) {
+                toggleContent();
+                //alert('თქვენ მიაღწიეთ ალკოჰოლური სასმლის მიღებისთვის კანონიერ ასაკს');
+            } else {
+                //alert('სამწუხაროდ, თქვენ არ გაქვთ ალკოჰოლური სასმლის მიღების უფლება');
+                errMsg.classList.remove("d-none");
+              errMsg.classList.add("d-block");
+              inputFields.style.display="none"
+              timeline.fromTo("#errorMsg",
+                               { y: 100 },  // Start at 400px from the top (or at the bottom of the container),
+                              {
+                          duration: 3,
+                          opacity: 1,
+                          y: 0,
+                          stagger: 0.3,
+                          yoyo: true,
+                          ease: "power3.out", // Ease effect for smooth animation
+                        });
+                timeline.play();
+            }
+        }
+
+function toggleContent() {
+      const content = document.getElementById('content');
+      const mainContent = document.getElementById('mainContent');
+      const footerTag = document.getElementById('footerInfo');
+      
+      
+      // Toggle between visible and invisible by changing the display property
+      if (content.style.display === 'block' || content.style.display === '') {
+        content.style.display = 'none';  // Hide the content
+        mainContent.style.display = 'block';  
+        document.body.style.backgroundColor = 'transparent'; // Remove background color
+        document.body.style.display = 'block';
+        footerInfo.style.display = 'block';
+        
+      } else {
+        content.style.display = 'block'; // Show the content
+      }
+    }
+</script>
 </html>

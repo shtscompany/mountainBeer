@@ -1,1 +1,48 @@
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}    
 
+.beer-title {
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
+  }
+  /* Styling for each letter to make it animatable */
+  .beer-title span {
+    display: inline-block;
+    opacity: 0; /* Initially hide the letters */
+    transform: translateY(100%);
+  }
+
+
+
+
+.top-content {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .inputs {
+    gap: 15px; /* Space between inputs */
+  }
+  .input {
+    max-width: 80px;
+  }
+  .input:last-child {
+    max-width: 100px;
+  }
+
+/*Hide the content  */
+#content {
+    display: block; /* Initially hidden */
+    color: #fff;
+  }
+#mainContent {
+    display: none; /* Initially hidden */
+  }
